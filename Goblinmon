@@ -1,0 +1,224 @@
+import time
+import sys
+import os
+
+#Ich verwende Delayprint um den Text fliessend angezeigt zu bekommen.
+
+def delay_print(s):
+
+    for c in s:
+
+        sys.stdout.write(c)
+
+        sys.stdout.flush()
+
+        time.sleep(0.02)
+
+prompt = '>--I> '
+
+base_ad = 10
+
+#Dies hier sind alle Kreaturen die es in meinem Spiel gibt, alle haben einen Basiswert an schaden. Die Abilitys haben dan unterschiedlich schaden.
+
+goblin = {
+    'name': 'Goblin',
+    'hp': 80,
+    'ability': [{'daggerslice': 15, 'stamina': 20}, {'healpod': 20, 'stamina': 40}],
+    'Stamina': 100
+}
+
+giant = {
+    'name': 'Giant',
+    'hp': 200,
+    'ability': [{'smash': 40, 'stamina': 50}, {'reskin': 15, 'stamina': 20}],
+    'Stamina' : 100
+}
+
+dwarf = {
+    'name': 'Dwarf',
+    'hp': 100,
+    'ability': [{'shotgun': 35, 'stamina': 30}, {'hammer_slash': 20, 'stamina': 10}],
+    'Stamina' : 100
+}
+
+vampire = {
+    'name': 'Vampire',
+    'hp': 90,
+    'ability': [{'bite': 20, 'stamina': 5}, {'bloodthirst': 30, 'stamina': 25}],
+    'Stamina' : 100
+}
+
+orc = {
+    'name': 'Orc',
+    'hp': 150,
+    'ability': [{'bolder_trow': 50, 'stamina': 40}, {'healing_rage': 50, 'stamina': 30}],
+    'Stamina' : 100
+}
+
+elf = {
+    'name': 'Night-Elf',
+    'hp': 120,
+    'ability': [{'ionian_speer': 40, 'stamina': 25}, {'magical_healpod': 40, 'stamina': 60}],
+    'Stamina' : 100
+}
+
+human = {
+    'name': 'Human',
+    'hp': 120,
+    'ability': [{'mighty_sword': 30, 'stamina': 20}, {'human_will': 60, 'stamina': 80}],
+    'Stamina' : 100
+}
+
+fire_dragon = {
+    'name': 'Fire_Dragon',
+    'hp': 350,
+    'ability': [{'burning_flames': 40}],
+}
+
+ice_dragon = {
+    'name': 'Ice_Dragon',
+    'hp': 250,
+    'abilitys': [{'blizzard': 50}],
+}
+
+leaf_dragon = {
+    'name': 'Leaf_Dragon',
+    'hp': 300,
+    'ability': [{'slicing_leaf': 35}],
+}
+
+lightning_dragon = {
+    'name': 'Lightning_Dragon',
+    'hp': 400,
+    'ability': [{'thunderstorm': 45}],
+}
+
+air_dragon = {
+    'name': 'Air_Dragon',
+    'hp': 350,
+    'ability': [{'burning_flames': 40}],
+}
+
+rock_dragon = {
+    'name': 'Rock_Dragon',
+    'hp': 450,
+    'ability': [{'rock_spikes': 30}],
+}
+
+
+dragons =(
+    fire_dragon,
+    ice_dragon,
+    leaf_dragon,
+    lightning_dragon,
+    air_dragon,
+    rock_dragon
+)
+
+playable_creatures =(
+    goblin,
+    giant,
+    dwarf,
+    vampire,
+    orc,
+    elf,
+    human
+)
+
+#-------------------------------------------------------------------------------------------------------------------------------------
+
+player = input(prompt)
+yeet = input(prompt)
+
+delay_print('Drücke <enter> um das Spiel zu starten.')
+
+start = input(prompt)
+
+
+print('''
+
+ ███▄    █  ▒█████  ▄▄▄█████▓     █████▒██▓ ███▄    █  ▄▄▄       ██▓       
+ ██ ▀█   █ ▒██▒  ██▒▓  ██▒ ▓▒   ▓██   ▒▓██▒ ██ ▀█   █ ▒████▄    ▓██▒       
+▓██  ▀█ ██▒▒██░  ██▒▒ ▓██░ ▒░   ▒████ ░▒██▒▓██  ▀█ ██▒▒██  ▀█▄  ▒██░       
+▓██▒  ▐▌██▒▒██   ██░░ ▓██▓ ░    ░▓█▒  ░░██░▓██▒  ▐▌██▒░██▄▄▄▄██ ▒██░       
+▒██░   ▓██░░ ████▓▒░  ▒██▒ ░    ░▒█░   ░██░▒██░   ▓██░ ▓█   ▓██▒░██████▒   
+░ ▒░   ▒ ▒ ░ ▒░▒░▒░   ▒ ░░       ▒ ░   ░▓  ░ ▒░   ▒ ▒  ▒▒   ▓▒█░░ ▒░▓  ░   
+░ ░░   ░ ▒░  ░ ▒ ▒░     ░        ░      ▒ ░░ ░░   ░ ▒░  ▒   ▒▒ ░░ ░ ▒  ░   
+   ░   ░ ░ ░ ░ ░ ▒    ░          ░ ░    ▒ ░   ░   ░ ░   ░   ▒     ░ ░      
+         ░     ░ ░                      ░           ░       ░  ░    ░  ░   
+                                                                           
+     █████▒▄▄▄       ███▄    █ ▄▄▄█████▓ ▄▄▄        ██████▓██   ██▓        
+   ▓██   ▒▒████▄     ██ ▀█   █ ▓  ██▒ ▓▒▒████▄    ▒██    ▒ ▒██  ██▒        
+   ▒████ ░▒██  ▀█▄  ▓██  ▀█ ██▒▒ ▓██░ ▒░▒██  ▀█▄  ░ ▓██▄    ▒██ ██░        
+   ░▓█▒  ░░██▄▄▄▄██ ▓██▒  ▐▌██▒░ ▓██▓ ░ ░██▄▄▄▄██   ▒   ██▒ ░ ▐██▓░        
+   ░▒█░    ▓█   ▓██▒▒██░   ▓██░  ▒██▒ ░  ▓█   ▓██▒▒██████▒▒ ░ ██▒▓░        
+    ▒ ░    ▒▒   ▓▒█░░ ▒░   ▒ ▒   ▒ ░░    ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ██▒▒▒         
+    ░       ▒   ▒▒ ░░ ░░   ░ ▒░    ░      ▒   ▒▒ ░░ ░▒  ░ ░▓██ ░▒░         
+    ░ ░     ░   ▒      ░   ░ ░   ░        ░   ▒   ░  ░  ░  ▒ ▒ ░░          
+                ░  ░         ░                ░  ░      ░  ░ ░             
+                                                           ░ ░             
+                        ▒██   ██▒ ██▒   █▓ ██▓                             
+                        ▒▒ █ █ ▒░▓██░   █▒▓██▒                             
+                        ░░  █   ░ ▓██  █▒░▒██▒                             
+                         ░ █ █ ▒   ▒██ █░░░██░                             
+                        ▒██▒ ▒██▒   ▒▀█░  ░██░                             
+                        ▒▒ ░ ░▓ ░   ░ ▐░  ░▓                               
+                        ░░   ░▒ ░   ░ ░░   ▒ ░                             
+                         ░    ░       ░░   ▒ ░                             
+                         ░    ░        ░   ░                               
+                                      ░        
+
+''')
+
+delay_print('''Willkommen in der Welt von Goblinmon, du hast es dir zur Aufgabe 
+gemacht die verschiedensten Monster der Arenen zu bekaempfen und dich bis in die 
+Boss-Arena durchzuschlangen.''')
+
+weiter = input(prompt)
+
+print(f'''
+
+Wähle als erstes eine Rasse.
+
+|    goblin    |
+|    giant     |
+|    dwarf     |
+|    vampire   |
+|    orc       |
+|    elf       |
+|    human     |
+''')
+done = False
+
+while not done:
+    if input(prompt) == 'goblin':
+        delay_print(f'{player_name} du hast den Goblin gewählt, du besitzt nun die fähigkeiten: Daggerslice und Healpod.')
+        done = True
+    elif input(prompt) == 'giant':
+        delay_print(f'{player_name} du hast den Giant (Riesen) gewählt, du besitzt nun die fähigkeiten: Smash und Reskin.')
+        done = True
+    elif input(prompt) == 'dwarf':
+        delay_print(f'{player_name} du hast den Dwarf gewählt, du besitzt nun die Fähigkeiten: Shotgun und Hammer slash')
+        done = True
+    elif input(prompt) == 'vampire':
+        delay_print(f'{player_name} du hast den Vampir gewählt, du besitzt nun die Fähigkeiten: Bite und Bloodthirst')
+        done = True
+    elif input(prompt) == 'orc':
+        delay_print(f'{player_name} du hast den Orc gewählt, du besitzt nun die Fähigkeiten: Bolder throw und Healing Rage')
+        done = True
+    elif input(prompt) == 'elf':
+        delay_print(f'{player_name} du hast den Elfen gewählt, du besitzt nun die Fähigkeiten: Ionian Ipeer und magical Healpod')
+        done = True
+    elif input(prompt) == 'human':
+        delay_print(f'{player_name} du hast den Mensch gewählt, du besitzt nun die Fähigkeiten: Mighty Sword und Human Will')
+        done = True            
+    else:
+        print('Ich glaube du hast dich vertippt!')
+
+
+
+
+
+
+
+        {goblin["ability"][0]["daggerslice"]}
